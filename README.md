@@ -1,2 +1,2 @@
-# DCBot-Example-ZLib-ZOn
+# DC++ Bot
 An example dc++ bot
