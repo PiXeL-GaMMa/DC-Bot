@@ -132,7 +132,7 @@ end;
 
 //
 // the following procedure keeps adding additional data to deflate until the stream end is found
-// the decompressed data and additional left over data is placed back into normal buffer along and then sent for processing
+// the decompressed data and additional left over data is placed back into normal buffer and then sent for processing
 //
 procedure TTestBot.processZBuffer;
 const
@@ -197,7 +197,7 @@ end;
 
 
 //
-// simple onRead event, that will call specific process depending if ZOn is enabled
+// simple onRead event, that will call specific procedure depending if ZOn is enabled
 //
 procedure TMainFRM.readEvent(Sender: TObject; Socket: TCustomWinSocket);
 var
