@@ -2,7 +2,7 @@
 // A demonstration dc++ bot - I will update occasionally demonstrating data processing tactics or protocol features as requested.
 // Author: Colin J.D. Stewart
 // License: MIT - If you find something useful, a thanks or attribution would be nice :)
-// DOGEcoin tips welcome:
+// DOGEcoin tips welcome: DBxYmNXLSGwS8M3uYHyMr9BM7xbZPwZ2Xa
 //
 //
 // Current features/demonstrations:
