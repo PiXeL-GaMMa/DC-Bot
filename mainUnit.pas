@@ -1,14 +1,14 @@
 //
-// A demonstration dc++ bot - I will update occasionally demonstrating data processing tactics and/or protocol features as requested.
+// A demonstration dc++ bot - I will update occasionally demonstrating data processing tactics or protocol features as requested.
 // Author: Colin J.D. Stewart
 // License: MIT - If you find something useful, a thanks or attribution would be nice :)
-// DOGE coin tips welcome: DBxYmNXLSGwS8M3uYHyMr9BM7xbZPwZ2Xa
+// DOGEcoin tips welcome: DBxYmNXLSGwS8M3uYHyMr9BM7xbZPwZ2Xa
 //
 //
 // Current features/demonstrations:
 // * The use of ZLib for the $ZOn| protocol feature.
 //
-// Last update: 21.10.2021
+// Last update: 25.10.2021
 //
 unit mainUnit;
 
@@ -16,7 +16,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ScktComp,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, IdBaseComponent, IdComponent,
+  IdTCPConnection, IdTCPClient, Vcl.StdCtrls, ScktComp,
 
   System.ZLib;
 
@@ -117,11 +118,7 @@ begin
     Socket.SendText('$Version 1,0091|$GetNickList|$MyINFO $ALL BotName <ClientType V:1.0.0.0,M:A,H:1/0/0,S:10>$ $1000' + Char(1) + '$$0$|');
   end else if Copy(command_line, 1, 4) = '$ZOn' then begin
     // reset and initialize the stream struct
-    F_zs.next_in := nil;
-    F_zs.avail_in := 0;
-    F_zs.zalloc := nil;
-    F_zs.zfree := nil;
-    F_zs.opaque := 0;
+    zeroMemory(@F_zs, sizeOf(TZStreamRec));
     inflateInit(F_zs);
 
     F_zbuf := '';
@@ -139,6 +136,9 @@ const
 var
   rc: Integer;
 begin
+  // no data yet? then exit
+  if Length(F_zbuf) = 0 then exit;
+
   repeat
     F_zs.next_in := PByte(@F_zbuf[1]);
     F_zs.avail_in := Length(F_zbuf);
